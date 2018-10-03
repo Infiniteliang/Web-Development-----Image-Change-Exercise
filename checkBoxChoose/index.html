@@ -1,0 +1,111 @@
+<!Doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Check Box Practice (select all, reverse)</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			dl{
+				width: 130px;
+				border: 1px solid #333;
+				border-radius: 5px ;
+				text-align: center;
+				margin: 20px auto; 
+				padding: 10px 20px; 
+				background: #f2f2f2;
+			}
+			dt{ 
+				line-height: 40px; 
+				border-bottom: 1px solid #333; 
+				text-align: left; 
+				}
+		    dd p{ 
+			    line-height: 35px; 
+			    }
+		    .info{ 
+			    width: 475px; 
+			    line-height: 2em; 
+			    text-align: center; 
+			    font-size: 12px; 
+			    background: #f2f2f2; 
+			    margin: 0 auto; 
+			    }
+		</style>
+		<script>
+			window.onload = function(){
+				var checkAll = document.getElementById("checkAll");
+				var checkReverse = document.getElementById("checkReverse");
+				var label = document.getElementsByTagName("label")[0];
+				var input = document.getElementsByTagName("input");
+				
+				function isChecked(){
+					var n =0
+					for(var i =1; i<input.length; i++){
+						
+						input[i].checked&& n++;
+					}
+					input[0].checked = n == input.length-1;
+					label.innerHTML = input[0].checked?"choose Nothing":"choose All";
+				}
+				/**
+				function isCheckAll(){
+				for( var i=1, n=0; i<input.length; i++ ){
+					input[i].checked && n++;
+				}
+				input[0].checked = n == input.length-1;
+				label.innerHTML = input[0].checked ? "全不选":"全选";
+
+			}**/
+				
+				
+				//Choose All or Choose Nothing
+				checkAll.onclick = function(){
+					for(var i = 1; i<input.length; i++){
+						input[i].checked = this.checked;
+					}
+					isChecked();
+				}
+				
+				//reverse selection
+				checkReverse.onclick = function(){
+					for(var i = 1; i<input.length; i++){
+						input[i].checked = !input[i].checked;
+					}
+					isChecked()
+				}
+				
+				//Update checked numbers
+				for(var i =0; i<input.length; i++){
+					input[i].checked = function(){
+						isChecked();
+					}
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<dl>
+			<dt>
+			<input type="checkbox" id="checkAll"> <label>Check All</label> <a href="javascript:" id="checkReverse">Reverse Check</a>
+			<dd>
+				<p><label><input type="checkbox">Option One</label></p>
+				<p><label><input type="checkbox">Option Two</label></p>
+				<p><label><input type="checkbox">Option Three</label></p>
+				<p><label><input type="checkbox">Option Four</label></p>
+				<p><label><input type="checkbox">Option Five</label></p>
+				<p><label><input type="checkbox">Option Six</label></p>
+				<p><label><input type="checkbox">Option Seven</label></p>
+				<p><label><input type="checkbox">Option Eight</label></p>
+				<p><label><input type="checkbox">Option Nine</label></p>
+			    <p><label><input type="checkbox">Option Ten</label></p>
+			</dd>
+			</dt>
+		</dl>
+		<div class="info">1. Choose All/None; 2. Update selected Number</div>
+	</body>
+	
+</html>
